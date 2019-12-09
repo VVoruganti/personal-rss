@@ -1,8 +1,20 @@
 import smtplib
 
-s = smtplib.SMTP("smtp.gmail.com", 587)
+smtp = smtplib.SMTP("smtp.gmail.com", 587)
 
-s.login("INSERT_USER", "INSERT PASSWORD")
+smtp.ehlo()
+
+smtp.starttls()
+
+user = input("Username: ")
+pswd = input("Password: ")
+
+smtp.login(user, pswd)
+
+smtp.sendmail("MY_EMAIL_ADDRESS", "recipient_email_address", "Subject: So long.\n body of the mssage")
+
+smtp.quit()
+
 
 
 
