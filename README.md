@@ -22,6 +22,7 @@ fun.
     - [ ] VEA (FTSE Developed Markets)
     - [ ] VNQ (Real Estate ETF)
     - [ ] VWO (FTSE Emerging Markets)
+    - [ ] ES=F (S&P Futures)
 - [ ] Hacker News Front Page
 - [ ] Lobste.rs Front Page
 - [ ] Weather
@@ -33,3 +34,4 @@ fun.
 - [ ] Top Medium Posts
 - [ ] Top Dev.to posts
 - [ ] Top EchoJS Posts
+- [ ] Product Hunt Daily Articles

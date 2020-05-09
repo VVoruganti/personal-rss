@@ -18,7 +18,12 @@ target = input("Who is receiving: ")
 
 # For some reason there could not be a space between the \n and the next letter
 # Could probably be better by just using triple quote messages
-smtp.sendmail(source, target, "Subject: So long.\nDear Alice, so long and thanks for all the fish. Sincerely, Bob")
+smtp.sendmail(source, target, 
+        """Subject: So long.\n
+
+        Dear Alice, so long and thanks for all the fish. Sincerely, Bob
+
+        """)
 
 # Closes the server
 smtp.quit()
