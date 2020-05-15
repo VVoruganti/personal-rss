@@ -2,6 +2,7 @@ astroid==2.3.2
 attrs==19.3.0
 Automat==20.2.0
 beautifulsoup4==4.9.0
+bs4==0.0.1
 certifi==2019.9.11
 cffi==1.14.0
 chardet==3.0.4
@@ -30,7 +31,6 @@ pynvim==0.4.1
 pyOpenSSL==19.1.0
 queuelib==1.5.0
 requests==2.22.0
-selenium==3.141.0
 service-identity==18.1.0
 six==1.12.0
 soupsieve==2.0

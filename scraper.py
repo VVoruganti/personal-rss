@@ -1,20 +1,34 @@
 import requests
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
+from bs4 import BeautifulSoup
+import praw
 
 sites = [
         "http://www.reddit.com/r/news",
         "https://news.ycombinator.com/",
-        "https://lobste.rs/",
-        "https://devpost.com/",
-        "https://www.echojs.com",
-        "https://www.producthunt.com/"]
+        "https://lobste.rs/"]
 
-options = Options()
-options.headless = True
+def soupify(link):
+    r = requests.get(link)
+    return BeautifulSoup(r.content, "html.parser")
 
-# driver = webdriver.Firefox()
-# driver.get("http://www.python.org")
+reddit_links = []
+hackernews_links = []
+lobster_links = []
+# Code for Hacker News
+hacker_news = soupify(sites[1])
+cells = hacker_news.find_all("tr", class_="athing")
 
-# driver.close()
+for i in range(15):
+    link = cells[i].find('a', class_="storylink") # title with the link to the article
+    hackernews_links.append((link.text,link.get('href')))
+
+# Code for lobste.rs
+lobsters = soupify(sites[2])
+cells = lobsters.find_all("li", class_="story")
+
+for i in range(15):
+    link = cells[i].find('a', class_="u-url")
+    lobster_links.append((link.text, link.get('href')))
+
+# Code for Reddit
+
