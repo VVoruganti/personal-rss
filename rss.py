@@ -8,12 +8,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
+import re
 
 load_dotenv()
 
 reddit_links = []
 hackernews_links = []
 lobster_links = []
+manga_links = [] 
 
 def soupify(link):
     r = requests.get(link)
@@ -25,9 +27,36 @@ reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID'),
                      user_agent=os.getenv('USER_AGENT'),
                      username=os.getenv('REDDIT_USERNAME'),
                      password=os.getenv('REDDIT_PASSWORD'))
-hot_posts = reddit.subreddit('news').hot(limit=15)
-for post in hot_posts:
+hot_news_posts = reddit.subreddit('news').hot(limit=15)
+for post in hot_news_posts:
     reddit_links.append((post.title, post.url))
+
+# Manga from reddit
+manga = ["One Piece",
+ "Black Clover",
+ "Berserk",
+ "Kingdom",
+ "My Hero Academia",
+ "Boku no Hero Academia",
+ "Fire Force", 
+ "Attack on Titan",
+ "Solo Leveling"]
+
+mangas = ''
+
+# Form regex
+for i in range(len(manga)):
+    mangas += "(" + manga[i] + ")|" 
+
+
+manga_regex = re.compile(mangas[:-1], re.IGNORECASE)
+
+manga_posts = reddit.subreddit('manga').hot(limit=100)
+
+for post in manga_posts:
+    check = manga_regex.search(post.title)
+    if(check != None):
+        manga_links.append((post.title, post.url))
 
 # Code for Hacker News
 hacker_news = soupify("https://news.ycombinator.com/")
@@ -53,9 +82,16 @@ for cell in hackernews_links:
 body += "\nLobste.rs\n\n"
 for cell in lobster_links:
     body += "Title: {}\nLink: {}\n\n".format(cell[0],cell[1])
+body += "\nManga\n\n"
+for cell in manga_links:
+    body += "Title: {}\nLink: {}\n\n".format(cell[0],cell[1])
 
 
-#### Email ####
+
+
+#############################################################
+####                     Email                           ####
+#############################################################
 smtp = smtplib.SMTP("smtp.gmail.com", 587)
 
 # Required to setup the server
@@ -76,7 +112,7 @@ msg = MIMEText(body, _charset="UTF-8")
 msg.set_charset('utf8')
 msg['FROM'] = source
 msg['To'] = target
-msg['Subject'] = Header("Personal RSS Test",'UTF-8').encode()
+msg['Subject'] = Header("Personal RSS",'UTF-8').encode()
 
 # _attach = MIMEText(body.encode('utf-8'), 'html', 'UTF-8')
 # msg.attach(_attach)
