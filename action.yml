@@ -1,0 +1,6 @@
+# action.yml
+name: 'Personal RSS'
+description: 'Scraper that sends feed to email each day'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
