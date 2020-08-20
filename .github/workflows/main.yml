@@ -1,0 +1,10 @@
+name: "A workflow for personal rss system"
+env:
+    EMAIL: ${{ secrets.EMAIL }}
+    PASSWORD: ${{ secrets.PASSWORD }}
+on:
+    schedule:
+        - cron: '0 8 * * *'
+steps:
+    - uses: actions/checkout@v1
+    - uses: ./personal-rss

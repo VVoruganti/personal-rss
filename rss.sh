@@ -1,1 +1,2 @@
-python rss.py
+#!/bin/bash
+python /rss/rss.py
