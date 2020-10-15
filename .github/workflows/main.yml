@@ -1,10 +1,23 @@
 name: "A workflow for personal rss system"
-env:
-    EMAIL: ${{ secrets.EMAIL }}
-    PASSWORD: ${{ secrets.PASSWORD }}
+
 on:
     schedule:
         - cron: '0 8 * * *'
-steps:
-    - uses: actions/checkout@v1
-    - uses: ./personal-rss
+jobs:
+    rss:
+        name: "rss step"
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo content
+              uses: actions/checkout@v2
+            - name: setup python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.8 #install python
+            - name: install requirements and run script
+              run: |
+                  python -m pip install -r requirements.txt
+                  python rss.py
+              env:
+                  EMAIL: ${{ secrets.EMAIL }}
+                  PASSWORD: ${{ secrets.PASSWORD }}
