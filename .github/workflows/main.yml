@@ -22,5 +22,11 @@ jobs:
               run: |
                   python rss.py
               env:
-                  EMAIL: ${{ secrets.EMAIL }}
-                  PASSWORD: ${{ secrets.PASSWORD }}
+                  EMAIL_USERNAME: ${{ secrets.EMAIL }}
+                  EMAIL_PASSWORD: ${{ secrets.PASSWORD }}
+                  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+                  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+                  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+                  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+                  TARGET: ${{ secrets.TARGET }}
+
