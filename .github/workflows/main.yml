@@ -1,5 +1,4 @@
-name: "A workflow for personal rss system"
-
+name: "Personal RSS System"
 on:
     schedule:
         - cron: '0 8 * * *'
@@ -14,9 +13,12 @@ jobs:
               uses: actions/setup-python@v2
               with:
                   python-version: 3.8 #install python
-            - name: install requirements and run script
+            - name: install dependencies
               run: |
-                  python -m pip install -r requirements.txt
+                  python -m pip install --upgrade pip
+                  pip install requirements.txt
+            - name: Scrape Sources
+              run: |
                   python rss.py
               env:
                   EMAIL: ${{ secrets.EMAIL }}
