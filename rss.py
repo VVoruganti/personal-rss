@@ -21,6 +21,8 @@ def soupify(link):
     r = requests.get(link)
     return BeautifulSoup(r.content, "html.parser")
 
+print(os.getenv('TARGET'))
+
 # Code for Reddit
 reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID'),
                      client_secret=os.getenv('CLIENT_SECRET'),
