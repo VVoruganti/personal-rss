@@ -8,7 +8,7 @@ cffi==1.14.0
 chardet==3.0.4
 constantly==15.1.0
 convertapi==1.1.0
-cryptography==2.9.2
+cryptography==3.2
 cssselect==1.1.0
 greenlet==0.4.15
 hyperlink==19.0.0
@@ -20,6 +20,8 @@ lxml==4.5.0
 mccabe==0.6.1
 msgpack==1.0.0
 parsel==1.6.0
+praw==7.1.0
+prawcore==1.5.0
 Protego==0.1.16
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
@@ -33,7 +35,9 @@ service-identity==18.1.0
 six==1.12.0
 soupsieve==2.0
 typed-ast==1.4.0
+update-checker==0.18.0
 urllib3==1.25.6
 w3lib==1.21.0
+websocket-client==0.57.0
 wrapt==1.11.2
 zope.interface==5.1.0

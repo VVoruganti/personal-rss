@@ -1,5 +1,6 @@
 name: "Personal RSS System"
 on:
+    workflow_dispatch:
     schedule:
         - cron: '0 8 * * *'
 jobs:
@@ -16,10 +17,18 @@ jobs:
             - name: install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  pip install requirements.txt
+                  pip install -r requirements.txt
             - name: Scrape Sources
               run: |
+                  echo $TARGET
                   python rss.py
               env:
-                  EMAIL: ${{ secrets.EMAIL }}
-                  PASSWORD: ${{ secrets.PASSWORD }}
+                  EMAIL_USERNAME: ${{ secrets.EMAIL }}
+                  EMAIL_PASSWORD: ${{ secrets.PASSWORD }}
+                  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+                  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+                  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+                  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+                  TARGET: ${{ secrets.TARGET }}
+                  USER_AGENT: ${{ secrets.USER_AGENT }}
+          
