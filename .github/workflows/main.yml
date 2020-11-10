@@ -20,7 +20,6 @@ jobs:
                   pip install -r requirements.txt
             - name: Scrape Sources
               run: |
-                  echo $TARGET
                   python rss.py
               env:
                   EMAIL_USERNAME: ${{ secrets.EMAIL }}
